@@ -1,0 +1,7 @@
+* text=auto eol=lf
+*.sh text eol=lf
+*.png binary
+*.jpg binary
+*.whl binary
+uv.lock text eol=lf linguist-generated=true
+tests/server/golden/*.json linguist-generated=true

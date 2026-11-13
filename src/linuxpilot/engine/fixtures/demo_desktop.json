@@ -1,0 +1,139 @@
+{
+  "start": "editor",
+  "keys": {
+    "editor|ctrl+s": "save_dialog",
+    "save_dialog|Escape": "editor",
+    "editor_menu|Escape": "editor"
+  },
+  "installed": [
+    {"desktop_id": "org.gnome.TextEditor.desktop", "name": "Text Editor", "exec_line": "gnome-text-editor %U", "keywords": ["Text", "Editor", "Plaintext"]},
+    {"desktop_id": "org.gnome.Settings.desktop", "name": "Settings", "exec_line": "gnome-control-center", "keywords": ["Preferences", "Settings"]},
+    {"desktop_id": "org.gnome.Calculator.desktop", "name": "Calculator", "exec_line": "gnome-calculator", "keywords": ["calculation", "arithmetic"]},
+    {"desktop_id": "google-chrome.desktop", "name": "Google Chrome", "generic_name": "Web Browser", "exec_line": "/usr/bin/google-chrome-stable %U"}
+  ],
+  "launches": {"org.gnome.Settings.desktop": "settings"},
+  "chromium": ["google-chrome.desktop"],
+  "screens": {
+    "editor": {"apps": [
+      {"name": "gedit", "pid": 4100, "id": "org.gnome.gedit", "toolkit": "gtk", "windows": [
+        {"role": "frame", "name": "notes.txt - gedit", "frame": [0, 0, 1000, 700], "active": true, "children": [
+          {"role": "menu-bar", "frame": [0, 0, 1000, 28], "children": [
+            {"role": "menu", "name": "File", "frame": [0, 0, 50, 28], "children": [
+              {"role": "menu-item", "name": "New", "hidden": true},
+              {"role": "menu-item", "name": "Save", "hidden": true},
+              {"role": "menu-item", "name": "Save As…", "hidden": true, "goto": "save_dialog"},
+              {"role": "menu", "name": "Recent", "hidden": true, "children": [
+                {"role": "menu-item", "name": "todo.txt", "hidden": true}
+              ]},
+              {"role": "menu-item", "name": "Quit", "hidden": true}
+            ]},
+            {"role": "menu", "name": "Edit", "frame": [50, 0, 50, 28], "children": [
+              {"role": "menu-item", "name": "Undo", "hidden": true}
+            ]}
+          ]},
+          {"role": "tool-bar", "name": "Toolbar", "frame": [0, 28, 1000, 40], "children": [
+            {"role": "push-button", "name": "Open", "frame": [8, 32, 70, 32], "goto": "editor_menu"},
+            {"role": "push-button", "name": "Save", "frame": [86, 32, 70, 32], "goto": "save_dialog"},
+            {"role": "push-button", "frame": [960, 32, 32, 32]}
+          ]},
+          {"role": "scroll-pane", "frame": [0, 70, 1000, 600], "children": [
+            {"role": "text", "name": "Document", "text": "Hello", "frame": [0, 70, 985, 600], "id": "doc-view"},
+            {"role": "scroll-bar", "frame": [985, 70, 15, 600], "value": {"current": 0, "min": 0, "max": 100, "step": 1}}
+          ]},
+          {"role": "status-bar", "children": [{"role": "label", "name": "Ln 1, Col 6", "frame": [8, 675, 120, 20]}]}
+        ]}
+      ]}
+    ]},
+    "editor_menu": {"apps": [
+      {"name": "gedit", "pid": 4100, "id": "org.gnome.gedit", "toolkit": "gtk", "windows": [
+        {"role": "frame", "name": "notes.txt - gedit", "frame": [0, 0, 1000, 700], "active": true, "children": [
+          {"role": "tool-bar", "name": "Toolbar", "frame": [0, 28, 1000, 40], "children": [
+            {"role": "push-button", "name": "Open", "frame": [8, 32, 70, 32]},
+            {"role": "push-button", "name": "Save", "frame": [86, 32, 70, 32], "goto": "save_dialog"}
+          ]},
+          {"role": "text", "name": "Document", "text": "Hello", "frame": [0, 70, 985, 600], "id": "doc-view"}
+        ]},
+        {"role": "window", "frame": [8, 66, 200, 120], "children": [
+          {"role": "popup-menu", "children": [
+            {"role": "menu-item", "name": "notes.txt", "frame": [8, 70, 200, 28], "goto": "editor"},
+            {"role": "menu-item", "name": "todo.txt", "frame": [8, 98, 200, 28], "goto": "editor"},
+            {"role": "menu-item", "name": "Other Documents…", "frame": [8, 126, 200, 28]}
+          ]}
+        ]}
+      ]}
+    ]},
+    "save_dialog": {"apps": [
+      {"name": "gedit", "pid": 4100, "id": "org.gnome.gedit", "toolkit": "gtk", "windows": [
+        {"role": "frame", "name": "notes.txt - gedit", "frame": [0, 0, 1000, 700], "children": [
+          {"role": "push-button", "name": "Save", "frame": [86, 32, 70, 32]}
+        ]},
+        {"role": "file-chooser", "name": "Save As", "frame": [200, 150, 600, 400], "active": true, "modal": true,
+         "children": [
+          {"role": "label", "name": "Name", "frame": [220, 170, 60, 24]},
+          {"role": "entry", "name": "Name", "text": "notes.txt", "frame": [290, 170, 300, 28], "focused": true,
+           "submit_goto": "editor"},
+          {"role": "push-button", "name": "Cancel", "frame": [560, 500, 100, 32], "goto": "editor"},
+          {"role": "push-button", "name": "Save", "frame": [680, 500, 100, 32], "goto": "editor"}
+        ]}
+      ]}
+    ]},
+    "settings": {"apps": [
+      {"name": "gnome-control-center", "pid": 4200, "id": "org.gnome.Settings", "toolkit": "GTK", "windows": [
+        {"role": "frame", "name": "Settings", "frame": [100, 50, 900, 650], "active": true, "children": [
+          {"role": "page-tab-list", "name": "Sections", "frame": [100, 90, 200, 300], "children": [
+            {"role": "page-tab", "name": "Wi-Fi", "frame": [100, 90, 200, 40], "selected": true},
+            {"role": "page-tab", "name": "Bluetooth", "frame": [100, 130, 200, 40]},
+            {"role": "page-tab", "name": "Appearance", "frame": [100, 170, 200, 40]}
+          ]},
+          {"role": "push-button", "name": "Main menu", "frame": [960, 55, 32, 32], "goto": "settings_menu"},
+          {"role": "switch", "name": "Dark Style", "frame": [700, 100, 50, 30], "actions": ["click"]},
+          {"role": "slider", "name": "Text Size", "frame": [400, 160, 300, 30],
+           "value": {"current": 100, "min": 50, "max": 200, "step": 10}},
+          {"role": "combo-box", "name": "Default", "frame": [400, 220, 200, 32], "children": [
+            {"role": "menu", "hidden": true, "children": [
+              {"role": "menu-item", "name": "Default", "hidden": true},
+              {"role": "menu-item", "name": "Large", "hidden": true},
+              {"role": "menu-item", "name": "Larger", "hidden": true}
+            ]}
+          ]},
+          {"role": "list", "name": "Networks", "frame": [400, 280, 500, 300], "children": [
+            {"role": "list-item", "name": "HomeWiFi", "frame": [400, 280, 500, 40]},
+            {"role": "list-item", "name": "Office", "frame": [400, 320, 500, 40]},
+            {"role": "list-item", "name": "Cafe", "frame": [400, 360, 500, 40]}
+          ]},
+          {"role": "spin-button", "name": "Timeout", "text": "5", "frame": [400, 600, 100, 30],
+           "value": {"current": 5, "min": 1, "max": 60, "step": 1}},
+          {"role": "push-button", "name": "Delete Network", "frame": [700, 600, 150, 32]}
+        ]}
+      ]}
+    ]},
+    "settings_menu": {"apps": [
+      {"name": "gnome-control-center", "pid": 4200, "id": "org.gnome.Settings", "toolkit": "GTK", "windows": [
+        {"role": "frame", "name": "Settings", "frame": [100, 50, 900, 650], "active": true, "children": [
+          {"role": "push-button", "name": "Main menu", "frame": [960, 55, 32, 32]}
+        ]},
+        {"role": "window", "frame": [800, 90, 200, 100], "children": [
+          {"role": "popup-menu", "children": [
+            {"role": "menu-item", "name": "Keyboard Shortcuts", "frame": [800, 90, 200, 30]},
+            {"role": "menu-item", "name": "Help", "frame": [800, 120, 200, 30], "goto": "settings"},
+            {"role": "menu-item", "name": "About Settings", "frame": [800, 150, 200, 30]}
+          ]}
+        ]}
+      ]}
+    ]},
+    "auth_prompt": {"apps": [
+      {"name": "gedit", "pid": 4100, "id": "org.gnome.gedit", "toolkit": "gtk", "windows": [
+        {"role": "frame", "name": "notes.txt - gedit", "frame": [0, 0, 1000, 700], "children": [
+          {"role": "push-button", "name": "Save", "frame": [86, 32, 70, 32]}
+        ]}
+      ]},
+      {"name": "polkit-gnome-authentication-agent-1", "pid": 900, "toolkit": "gtk", "windows": [
+        {"role": "dialog", "name": "Authentication Required", "frame": [600, 300, 400, 250], "active": true,
+         "children": [
+          {"role": "password-text", "name": "Password", "frame": [650, 400, 300, 30], "text": "x"},
+          {"role": "push-button", "name": "Authenticate", "frame": [850, 500, 120, 32]}
+        ]}
+      ]}
+    ]}
+  }
+}

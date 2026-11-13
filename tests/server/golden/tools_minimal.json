@@ -1,0 +1,455 @@
+[
+ {
+  "description": "Session type, accessibility, input/screenshot backends, focused window, and what to fix.",
+  "input_schema": {
+   "properties": {},
+   "title": "linux_statusArguments",
+   "type": "object"
+  },
+  "name": "linux_status",
+  "read_only": true
+ },
+ {
+  "description": "A window as compact lines (ref, role, name, value, state, centre). Default: the focused window.\nTake one per window; actions then return diffs. filter keeps matching elements; offset pages.",
+  "input_schema": {
+   "properties": {
+    "app": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "App"
+    },
+    "filter": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Filter"
+    },
+    "mode": {
+     "default": "interactive",
+     "enum": [
+      "interactive",
+      "full",
+      "text"
+     ],
+     "title": "Mode",
+     "type": "string"
+    },
+    "offset": {
+     "default": 0,
+     "title": "Offset",
+     "type": "integer"
+    },
+    "window_id": {
+     "anyOf": [
+      {
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Window Id"
+    }
+   },
+   "title": "linux_snapshotArguments",
+   "type": "object"
+  },
+  "name": "linux_snapshot",
+  "read_only": true
+ },
+ {
+  "description": "LAST RESORT (canvases, images): save a PNG (\u22641280 px) of the screen or a window; returns its path and\nscreenshot_id. show=true\nreturns the image; annotate=true draws refs. Prefer snapshots: images cost many tokens.",
+  "input_schema": {
+   "properties": {
+    "annotate": {
+     "default": false,
+     "title": "Annotate",
+     "type": "boolean"
+    },
+    "app": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "App"
+    },
+    "path": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Path"
+    },
+    "show": {
+     "default": false,
+     "title": "Show",
+     "type": "boolean"
+    },
+    "window_id": {
+     "anyOf": [
+      {
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Window Id"
+    }
+   },
+   "title": "linux_screenshotArguments",
+   "type": "object"
+  },
+  "name": "linux_screenshot",
+  "read_only": true
+ },
+ {
+  "description": "Click an element by ref (preferred) or x/y; count=2 double-clicks. Waits for the window to settle\nand returns what changed, including menus or dialogs it opened. Pixels from a screenshot:\ncoordinate_space=\"screenshot\" + screenshot_id.",
+  "input_schema": {
+   "properties": {
+    "button": {
+     "default": "left",
+     "enum": [
+      "left",
+      "right",
+      "middle"
+     ],
+     "title": "Button",
+     "type": "string"
+    },
+    "coordinate_space": {
+     "default": "screen",
+     "enum": [
+      "screen",
+      "screenshot"
+     ],
+     "title": "Coordinate Space",
+     "type": "string"
+    },
+    "count": {
+     "default": 1,
+     "title": "Count",
+     "type": "integer"
+    },
+    "ref": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Ref"
+    },
+    "report": {
+     "default": "diff",
+     "enum": [
+      "diff",
+      "snapshot",
+      "none"
+     ],
+     "title": "Report",
+     "type": "string"
+    },
+    "screenshot": {
+     "default": false,
+     "title": "Screenshot",
+     "type": "boolean"
+    },
+    "screenshot_id": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Screenshot Id"
+    },
+    "x": {
+     "anyOf": [
+      {
+       "type": "number"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "X"
+    },
+    "y": {
+     "anyOf": [
+      {
+       "type": "number"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Y"
+    }
+   },
+   "title": "linux_clickArguments",
+   "type": "object"
+  },
+  "name": "linux_click",
+  "read_only": false
+ },
+ {
+  "description": "Type into a field (ref, or the focused one). clear replaces its text; submit presses Enter.\nPassword fields need secret=true with a value the person gave you. Returns the diff.",
+  "input_schema": {
+   "properties": {
+    "clear": {
+     "default": false,
+     "title": "Clear",
+     "type": "boolean"
+    },
+    "ref": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Ref"
+    },
+    "report": {
+     "default": "diff",
+     "enum": [
+      "diff",
+      "snapshot",
+      "none"
+     ],
+     "title": "Report",
+     "type": "string"
+    },
+    "screenshot": {
+     "default": false,
+     "title": "Screenshot",
+     "type": "boolean"
+    },
+    "secret": {
+     "default": false,
+     "title": "Secret",
+     "type": "boolean"
+    },
+    "submit": {
+     "default": false,
+     "title": "Submit",
+     "type": "boolean"
+    },
+    "text": {
+     "title": "Text",
+     "type": "string"
+    }
+   },
+   "required": [
+    "text"
+   ],
+   "title": "linux_typeArguments",
+   "type": "object"
+  },
+  "name": "linux_type",
+  "read_only": false
+ },
+ {
+  "description": "Press key combos in order, e.g. \"ctrl+s\", [\"ctrl+a\", \"Delete\"], [\"super\"]. Text goes through\nlinux_type. Returns the diff.",
+  "input_schema": {
+   "properties": {
+    "keys": {
+     "anyOf": [
+      {
+       "items": {
+        "type": "string"
+       },
+       "type": "array"
+      },
+      {
+       "type": "string"
+      }
+     ],
+     "title": "Keys"
+    },
+    "report": {
+     "default": "diff",
+     "enum": [
+      "diff",
+      "snapshot",
+      "none"
+     ],
+     "title": "Report",
+     "type": "string"
+    },
+    "screenshot": {
+     "default": false,
+     "title": "Screenshot",
+     "type": "boolean"
+    }
+   },
+   "required": [
+    "keys"
+   ],
+   "title": "linux_keysArguments",
+   "type": "object"
+  },
+  "name": "linux_keys",
+  "read_only": false
+ },
+ {
+  "description": "Scroll an area (ref, default the main one) by pages or to top/bottom, or bring the into_view\nref into view. Says when it reached the end.",
+  "input_schema": {
+   "properties": {
+    "direction": {
+     "default": "down",
+     "enum": [
+      "up",
+      "down",
+      "left",
+      "right"
+     ],
+     "title": "Direction",
+     "type": "string"
+    },
+    "into_view": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Into View"
+    },
+    "pages": {
+     "default": 1.0,
+     "title": "Pages",
+     "type": "number"
+    },
+    "ref": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Ref"
+    },
+    "report": {
+     "default": "diff",
+     "enum": [
+      "diff",
+      "snapshot",
+      "none"
+     ],
+     "title": "Report",
+     "type": "string"
+    },
+    "screenshot": {
+     "default": false,
+     "title": "Screenshot",
+     "type": "boolean"
+    },
+    "to": {
+     "anyOf": [
+      {
+       "enum": [
+        "top",
+        "bottom"
+       ],
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "To"
+    }
+   },
+   "title": "linux_scrollArguments",
+   "type": "object"
+  },
+  "name": "linux_scroll",
+  "read_only": false
+ },
+ {
+  "description": "Apps: list running (with windows), installed (app filters), launch (reuses a running copy; waits until\nloaded, returns its snapshot), activate (brings it to the front and confirms; launches it if not running),\nclose (its window) or quit.",
+  "input_schema": {
+   "properties": {
+    "action": {
+     "default": "list",
+     "enum": [
+      "list",
+      "installed",
+      "launch",
+      "activate",
+      "close",
+      "quit"
+     ],
+     "title": "Action",
+     "type": "string"
+    },
+    "app": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "App"
+    },
+    "screenshot": {
+     "default": false,
+     "title": "Screenshot",
+     "type": "boolean"
+    }
+   },
+   "title": "linux_appArguments",
+   "type": "object"
+  },
+  "name": "linux_app",
+  "read_only": false
+ }
+]

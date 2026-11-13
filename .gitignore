@@ -1,0 +1,50 @@
+# --- Secrets and local settings (never commit) ---------------------------------------------------
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.pypirc
+
+# Local agent and editor folders (MCP client configs with absolute paths, skills, settings)
+.devin/
+.vscode/
+
+# --- Python ----------------------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*.so
+.venv/
+venv/
+env/
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# --- Tests, linters, type checkers -------------------------------------------------------------------
+.pytest_cache/
+.hypothesis/
+.ruff_cache/
+.mypy_cache/
+.pyright/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+
+# --- LinuxPilot output (screenshots of the desktop, logs) ---------------------------------------------
+linuxpilot-screenshots/
+*.log
+# measured spike output lists the apps installed on the machine it ran on
+spikes/*.out
+
+# --- Tool and editor artifacts -------------------------------------------------------------------------
+graphify-out/
+.qa-copilot/
+.idea/
+*.swp
+*~
+.DS_Store
+uv.lock

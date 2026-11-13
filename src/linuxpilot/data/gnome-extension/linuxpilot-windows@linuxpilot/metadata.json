@@ -1,0 +1,7 @@
+{
+  "uuid": "linuxpilot-windows@linuxpilot",
+  "name": "LinuxPilot window positions",
+  "description": "Tells LinuxPilot (on this computer, over the session D-Bus) where app windows are on screen, so it can outline the app it is working in, bring it to the front and close it like its title-bar button. Positions, titles and process ids only; no pixels or contents.",
+  "shell-version": ["42", "43", "44"],
+  "version": 2
+}
